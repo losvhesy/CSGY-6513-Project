@@ -5,6 +5,9 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import wordnet as wn
 from nltk.stem.porter import PorterStemmer
 from itertools import product
+import string
+
+stop_words = set(stopwords.words('english'))
 
 def reconstruct_text(token):
     text_list = []

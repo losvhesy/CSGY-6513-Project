@@ -3,8 +3,9 @@ from vega_datasets import data
 from .parsers import Parser
 from ..configs.spatial import spatial_commonsense
 from ..configs.attrs import attr_configs
-
-
+from ..configs import state2fips
+from .selectors import AttrSelector
+import pandas as pd
 def process_nlq(sent, df):
     interface = NLInterface()
     return interface.run(sent, df)
@@ -19,7 +20,7 @@ class NLInterface:
         selectors = NLInterface.build_selectors(spec.selectors)
         task = NLInterface.infer_task(spec)
         print("spec:", spec.filters)
-        f = NLInterface.build_execute_query(task, selectors, spec.filters, "state")
+        f = NLInterface.build_executor(task, selectors, spec.filters, "state")
         return f(df)
 
     @staticmethod
@@ -62,7 +63,7 @@ class NLInterface:
                 if True:
                     states_topo = alt.topo_feature(data.us_10m.url, 'states')
                     attrname = selector.get_attr()
-                    source = pd.merge(source, state2fips_df, how='left',
+                    source = pd.merge(source, state2fips, how='left',
                                       left_on='state', right_on='state')
                     return alt.Chart(source).mark_geoshape().encode(
                         shape='geo:G',

@@ -1,2 +1,2 @@
 from .libs.parsers import Parser
-from .libs.engine import NLInterface
+from .libs.engine import NLInterface, process_nlq

@@ -46,16 +46,11 @@ class TemporalFilter:
 
 
 class SpatialFilter:
-    def __init__(self, areas):
-        self.spatial_terms = spatial_terms
-        self.states = []
+    def __init__(self, states):
+        self.states = states
         self.type = "spatial"
-        for area in areas:
-            states = self.parse_area(area)
-            self.states.extend(states)
 
-    def parse_area(self, area):
-        return self.spatial_terms[area]['states']
+    
 
     def run(self, df):
         return df.filter(F.col("state").isin(self.states))

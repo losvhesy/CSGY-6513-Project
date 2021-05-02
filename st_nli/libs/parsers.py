@@ -98,7 +98,9 @@ class SpatialParser:
             return "LOC"
         else:
             return None
-
+    
+    def parse_region(self, region):
+        return self.spatial_terms[region.lower()]['states']
     def _parse(self, node):
         text = reconstruct_text(node)
         if node.pos_ == "NOUN" and node.n_lefts == 0:
@@ -118,7 +120,11 @@ class SpatialParser:
 
     def parse(self, token):
         parsed = self._parse(token)
-        return SpatialFilter(parsed['regions'])
+        referred_states = []
+        for region in parsed['regions']:
+            states = self.parse_region(region)
+            referred_states.extend(states)
+        return SpatialFilter(referred_states)
 
 
 class Parser:
@@ -199,7 +205,8 @@ class Parser:
         trees = [sent for sent in doc.sents]
         tree = trees[-1]
 
-        spec = Spec()
+        spec = Spec([])
+#         print("created: ", spec.filters)
         for node in tree.root.children:
             if node.dep_ == "dobj":
                 attrs = self.attr_parser.parse(node)
@@ -207,7 +214,9 @@ class Parser:
             elif node.dep_ == "prep":
                 prep = node
                 parsed = self.parse(prep)
+#                 print('node before', spec.filters)
                 spec.integrate_obj_spec(parsed)
+#                 print('node after', spec.filters)
             #         for prep_sub in prep.children:
             #             if prep_sub.dep_ == "pobj":
             #                 temporal_conds = parser.parse(prep_sub)
@@ -216,6 +225,9 @@ class Parser:
             for sub in node.children:
                 if sub.dep_ == "prep":
                     prep = sub
+#                     print('sub before', spec.filters)
                     parsed = self.parse(prep)
+                    
                     spec.integrate_obj_spec(parsed)
+#                     print('sub after::::', spec.filters)
         return spec
