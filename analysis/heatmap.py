@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 
 def retail(df):
+	alt.data_transformers.disable_max_rows()
 	selector = alt.selection_single(fields=['state'])
 
 	base = alt.Chart(df, title="Chart for retail data").properties(
@@ -40,6 +41,7 @@ def retail(df):
 	
 	
 def parks(df):
+	alt.data_transformers.disable_max_rows()
 	selector = alt.selection_single(fields=['state'])
 
 	base = alt.Chart(df, title="Chart for parks data").properties(
@@ -77,6 +79,7 @@ def parks(df):
 	
 
 def transit(df):
+	alt.data_transformers.disable_max_rows()
 	selector = alt.selection_single(fields=['state'])
 
 	base = alt.Chart(df, title="Chart for transit stations data").properties(
@@ -113,6 +116,7 @@ def transit(df):
 	)
 	
 def workplace(df):
+	alt.data_transformers.disable_max_rows()
 	selector = alt.selection_single(fields=['state'])
 
 	base = alt.Chart(df, title="Chart for workplaces data").properties(
@@ -149,6 +153,7 @@ def workplace(df):
 	)
 	
 def residential(df):
+	alt.data_transformers.disable_max_rows()
 	selector = alt.selection_single(fields=['state'])
 
 	base = alt.Chart(df, title="Chart for residential data").properties(
@@ -185,6 +190,7 @@ def residential(df):
 	)
 	
 def grocery(df):
+	alt.data_transformers.disable_max_rows()
 	selector = alt.selection_single(fields=['state'])
 
 	base = alt.Chart(df, title="Chart for grocery and pharmacy data").properties(
