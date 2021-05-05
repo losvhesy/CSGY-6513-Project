@@ -17,7 +17,12 @@ If you would like to use your own Python environment, you can use pip to install
 pip install ./requirements.txt
 ```
 
+## Prepare Data
+To enable spark functions, you need to upload the data to HFS
+```shell
+hfs --put ./integrated_data.csv
 
+```
 ## Running
 
 Our analysis notebook relies on Pyspark and jupyter. Since Pyspark relies on the Spark session, you can not directly use jupyter notebook command to start the notebook. Here is the steps you need to do.
