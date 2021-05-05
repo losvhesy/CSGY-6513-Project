@@ -19,6 +19,7 @@ pip install ./requirements.txt
 
 
 ## Running
+
 Our analysis notebook relies on Pyspark and jupyter. Since Pyspark relies on the Spark session, you can not directly use jupyter notebook command to start the notebook. Here is the steps you need to do.
 ```shell
 export PYSPARK_DRIVER_PYTHON=jupyter
