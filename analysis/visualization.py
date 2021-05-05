@@ -124,7 +124,7 @@ def plot_state_metric_corr(state_metric_correlation, metrics, use_log=True):
     if use_log:
         state_metric_correlation = transform_corr_log(state_metric_correlation, metrics)
     source_corr_matrix = generate_corr_items(state_metric_correlation, metrics)
-    alt.Chart(source_corr_matrix).mark_rect().encode(
+    return alt.Chart(source_corr_matrix).mark_rect().encode(
         y='metric:O',
         x='state:O',
         color='value:Q'
@@ -135,7 +135,7 @@ def plot_corr_map(state_metric_correlation, state2fips_df, metrics, use_log=True
     states = alt.topo_feature(data.us_10m.url, 'states')
     if use_log:
         state_metric_correlation = transform_corr_log(state_metric_correlation, metrics)
-    source_corr_matrix = generate_corr_items(state_metric_correlation)
+    source_corr_matrix = generate_corr_items(state_metric_correlation, metrics)
     map_source = source_corr_matrix
     map_source = pd.merge(map_source, state2fips_df, how='left',
                           left_on='state', right_on='state')
