@@ -25,7 +25,7 @@ hfs --put ./integrated_data.csv
 ```
 ## Running
 
-Our analysis notebook relies on Pyspark and jupyter. Since Pyspark relies on the Spark session, you can not directly use jupyter notebook command to start the notebook. Here is the steps you need to do.
+Our analysis notebook relies on Pyspark and jupyter. Since Pyspark relies on the Spark session, you can not directly use jupyter notebook command to start the notebook. Here are the steps you need to do.
 ```shell
 export PYSPARK_DRIVER_PYTHON=jupyter
 export PYSPARK_DRIVER_PYTHON_OPTS='notebook'
@@ -33,3 +33,8 @@ export PYSPARK_PYTHON='/scratch/gw2145/conda/envs/covid/bin/python' # if you use
 cd ./notebooks
 pyspark --deploy-mode=client
 ```
+After launching jupyter server, please open notebooks/combined.ipynb, which is the combined version of our notebook.
+If you have any question about the Pyspark environment, please contact guandewu@nyu.edu.
+
+## Running Without Pyspark
+Since configuring Pyspark is complicated, we also offer a version without Pyspark. However, this version does not support our NLI. After installing the necessary dependency, you can run the cells in the combined notebook until the last two cells. The above cells can run normally without Pyspark support.
