@@ -1,5 +1,7 @@
 # CSGY-6513-Project
 
+## Notebook
+Our final version of the jupyter notebook is notebooks/Combined.ipynb, which you can directly use.
 
 ## Installation
 To install the dependency, you can either use the requirements.txt file or directly use the conda environment on HPC.
